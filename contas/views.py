@@ -23,3 +23,14 @@ def novoFilme(request):
 
     data['form'] = form
     return render(request, 'contas/formFilme.html', data)
+
+def update(request, pk):
+    data = {}
+    filme = Filme.objects.get(pk=pk)
+    form = FormFilme(request.POST or None, instance=filme)
+    if form.is_valid():
+        form.save()
+        return redirect('listagemFilmes')
+
+    data['form'] = form
+    return render(request, 'contas/formFilme.html', data)
