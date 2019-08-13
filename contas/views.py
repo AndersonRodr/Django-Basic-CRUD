@@ -33,4 +33,11 @@ def update(request, pk):
         return redirect('listagemFilmes')
 
     data['form'] = form
+    data['deleteFilme'] = filme
     return render(request, 'contas/formFilme.html', data)
+
+def delete(request, pk):
+    data = {}
+    filme = Filme.objects.get(pk=pk)
+    filme.delete()
+    return redirect('listagemFilmes')
